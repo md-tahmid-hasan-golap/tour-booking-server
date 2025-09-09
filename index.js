@@ -28,6 +28,17 @@ async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
     await client.connect();
+    
+    // tures collaction
+    const turesCollaction = client.db("tour-management").collection("tours");
+
+
+    // tures post oparation
+    app.post('/tours', async(req, res) => {
+        const newTure = req.body
+        const result = await turesCollaction.insertOne(newTure)
+        res.send(result)
+    })
 
 
 
