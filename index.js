@@ -59,7 +59,36 @@ async function run() {
         res.send(result)
     })
 
+    //my added  ture  page
+    app.get('/myAdded-ture/:userEmail', async(req, res) => {
+        const userEmail = req.params.userEmail;
+        const queary = {userEmail}
+        const result = await turesCollaction.find(queary).toArray()
+        res.send(result)
+    })
 
+
+     // ture delede page
+    app.delete('/ture-delete/:id', async(req, res) => {
+        const id = req.params.id;
+        const queary = {_id: new ObjectId(id)}
+        const result = await turesCollaction.deleteOne(queary)
+        res.send(result)
+    })
+
+
+    // ture put oparation 
+    app.put('/update-ture/:id', async(req, res) => {
+        const id = req.params.id
+        const filter = {_id: new ObjectId(id)}
+         const options = {upsert: true}
+         const updateTure = req.body
+         const updateDoc = {
+            $set: updateTure
+         }
+         const result = await turesCollaction.updateOne(filter,updateDoc,options)
+         res.send(result)
+    })
 
 
 
