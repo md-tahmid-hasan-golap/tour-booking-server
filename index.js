@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 require('dotenv').config()
 const app = express();
 const port = process.env.PORT || 5000;
@@ -40,6 +40,24 @@ async function run() {
         res.send(result)
     })
 
+    // tures get oparation
+    app.get('/ture-limit', async(req, res) => {
+        const result = await turesCollaction.find().limit(6).toArray()
+        res.send(result)
+    })
+    // tures get oparation all cards
+    app.get('/all-tures-cards', async(req, res) => {
+        const result = await turesCollaction.find().toArray()
+        res.send(result)
+    })
+
+    // ture details page
+    app.get('/ture-details/:id', async(req, res) => {
+        const id = req.params.id;
+        const queary = {_id: new ObjectId(id)}
+        const result = await turesCollaction.findOne(queary)
+        res.send(result)
+    })
 
 
 
