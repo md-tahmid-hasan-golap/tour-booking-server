@@ -31,6 +31,7 @@ async function run() {
     
     // tures collaction
     const turesCollaction = client.db("tour-management").collection("tours");
+    const bookingCollaction = client.db("tour-management").collection("my-bookings");
 
 
     // tures post oparation
@@ -39,6 +40,9 @@ async function run() {
         const result = await turesCollaction.insertOne(newTure)
         res.send(result)
     })
+
+
+    // my-bookings post oparation
 
     // tures get oparation
     app.get('/ture-limit', async(req, res) => {
