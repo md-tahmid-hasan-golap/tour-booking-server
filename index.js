@@ -43,7 +43,12 @@ async function run() {
 
 
     // my-bookings post oparation
-    
+    app.post('/my-bookings', async(req, res) => {
+
+
+      const result = await bookingCollaction.insertOne()
+      res.send(result)
+    })
 
     // tures get oparation
     app.get('/ture-limit', async(req, res) => {
